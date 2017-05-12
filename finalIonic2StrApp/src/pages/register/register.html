@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Register</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+<form [formGroup]="registerForm" (ngSubmit)="signUp(registerForm.value)"> 
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input type="email" [formControl]="registerForm.controls['email']"></ion-input>
+    </ion-item><br/>
+    <div class="error-box" *ngIf="registerForm.controls['email'].hasError('required') && registerForm.controls['email'].touched">* Email is required!</div>
+		<div class="error-box" *ngIf="registerForm.controls['email'].hasError('pattern') && registerForm.controls['email'].touched">* Please enter a valid email!</div><br/>
+
+    <ion-item>
+      <ion-label floating>Password</ion-label>
+      <ion-input type="password" [formControl]="registerForm.controls['password']"></ion-input>      
+    </ion-item><br/>
+    <div class="error-box" *ngIf="registerForm.controls['password'].hasError('required') && registerForm.controls['password'].touched">* Provide a password please!</div>
+    <div class="error-box" *ngIf="registerForm.controls['password'].hasError('pattern') && registerForm.controls['password'].touched">* Password should have atleast 1 lowercase, 1 uppercase, 1 special char, 1 number and 6 chars long!</div>
+    <ion-item>
+      <ion-label floating>Confirm Password</ion-label>
+      <ion-input type="password" [formControl]="registerForm.controls['cnfPassword']" validateEqual="password"></ion-input>
+    </ion-item><br/>
+    <div class="error-box" *ngIf="registerForm.controls['cnfPassword'].hasError('required') && registerForm.controls['cnfPassword'].touched">* Retype the password!</div> 
+    <div class="error-box" *ngIf="registerForm.controls['cnfPassword'].hasError('pattern') && registerForm.controls['cnfPassword'].touched">* Password should have atleast 1 lowercase, 1 uppercase, 1 special char, 1 number and 6 chars long!</div>
+    <div padding>
+      <button ion-button block type="submit" [disabled]="!registerForm.valid">Register</button>
+    </div>
+  </ion-list>
+ </form>
+</ion-content>
